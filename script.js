@@ -1,6 +1,20 @@
 function volume_sphere() {
-    //Write your code here
-  
-} 
+  // Get radius value from input
+  const radiusInput = document.getElementById("radius").value;
+  const radius = parseFloat(radiusInput);
 
-window.onload = document.getElementById('MyForm').onsubmit = volume_sphere;
+  let volume;
+
+  // Validate radius: must be a non-negative number
+  if (isNaN(radius) || radius < 0) {
+    volume = NaN;
+  } else {
+    volume = (4 / 3) * Math.PI * Math.pow(radius, 3);
+    volume = volume.toFixed(4);
+  }
+
+  // Display result
+  document.getElementById("volume").value = volume;
+
+  return false; // Prevent form submission
+}
