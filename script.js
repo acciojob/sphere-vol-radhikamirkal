@@ -1,21 +1,22 @@
-function volume_sphere() {
-  // Ensure Cypress-required IDs exist
-  document.querySelector('input[name="radius"]').id = "radius";
-  document.querySelector('input[name="volume"]').id = "volume";
-  document.querySelector('input[type="submit"]').id = "submit";
+function volume_sphere(event) {
+  // Prevent form submission (page reload)
+  event.preventDefault();
 
   const radiusValue = document.getElementById("radius").value;
   const radius = parseFloat(radiusValue);
 
   let volume;
 
+  // Validate radius
   if (isNaN(radius) || radius < 0) {
     volume = "NaN";
   } else {
     volume = ((4 / 3) * Math.PI * Math.pow(radius, 3)).toFixed(4);
   }
 
+  // Display result
   document.getElementById("volume").value = volume;
-
-  return false; // prevent page reload
 }
+
+// Attach function to form submit
+document.getElementById("MyForm").addEventListener("submit", volume_sphere);
