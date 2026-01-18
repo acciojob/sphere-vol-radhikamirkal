@@ -1,20 +1,21 @@
 function volume_sphere() {
-  // Get radius value from input
-  const radiusInput = document.getElementById("radius").value;
-  const radius = parseFloat(radiusInput);
+  // Ensure Cypress-required IDs exist
+  document.querySelector('input[name="radius"]').id = "radius";
+  document.querySelector('input[name="volume"]').id = "volume";
+  document.querySelector('input[type="submit"]').id = "submit";
+
+  const radiusValue = document.getElementById("radius").value;
+  const radius = parseFloat(radiusValue);
 
   let volume;
 
-  // Validate radius: must be a non-negative number
   if (isNaN(radius) || radius < 0) {
-    volume = NaN;
+    volume = "NaN";
   } else {
-    volume = (4 / 3) * Math.PI * Math.pow(radius, 3);
-    volume = volume.toFixed(4);
+    volume = ((4 / 3) * Math.PI * Math.pow(radius, 3)).toFixed(4);
   }
 
-  // Display result
   document.getElementById("volume").value = volume;
 
-  return false; // Prevent form submission
+  return false; // prevent page reload
 }
